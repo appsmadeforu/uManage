@@ -1,2 +1,2 @@
 # uManage
-A user management web application developed using - python, django, html, css, bootstrap, sqlite3.
+A user management web application developed using - python3.7, django, html, css, bootstrap, sqlite3.

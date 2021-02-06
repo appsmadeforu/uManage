@@ -1,0 +1,101 @@
+img {
+    height:20pt;
+    width:100;
+    margin-left:10pt;
+}
+
+body {
+    background-color: #f1f1f1;
+}
+
+.left_nav_element{
+    background-color: #efefef;
+    height: 35px;
+}
+
+div#navbarToggleExternalContent {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    padding:0;
+    left: 0;
+    background-color: #383838;
+    overflow-x: hidden;
+    margin-top: 55px;
+}
+
+.left_nav_element ul {
+    padding-left: 25px;
+
+}
+
+.left_nav_element ul a {
+    color: #000;
+    font-weight: 500;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.justify-content-center.tabs {
+    margin-left: 40px;
+    margin-top: 10px;
+}
+.nav-item {
+    background: white;
+}
+.nav-item ul {
+    padding: 5% 10%;
+    border-left: 5px solid red;
+}
+.nav-item a{
+    color: black;
+}
+a:hover{
+    text-decoration: blink;
+}
+.nav-link {
+    display: block;
+    padding: 0;
+}
+.row.nav-tabs{
+    margin-top: 0.5%;
+    margin-left: 10%;
+}
+
+a.nav-tab-item.active {
+    border-bottom: 3px solid gray;
+    color: unset;
+}
+
+.card.main-content {
+    margin: 1% 1% 0 10% ;
+}
+
+.card-body {
+    padding-top: 2%;
+}
+
+button#search_submit {
+    background: none;
+    border: none;
+}
+
+input#search_box {
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+input:focus {
+    outline: none !important;
+    border:1px solid red;
+    box-shadow: 0 0 5px gray;
+}
+
+.row.table-row {
+    margin: 1% 1% 0;
+}
+
+.table-dark {
+    color: black;
+    background-color: #343a40;
+}

@@ -99,3 +99,9 @@ input:focus {
     color: black;
     background-color: #343a40;
 }
+tr.row-user:hover {
+    background-color: #E9ECEB;
+}
+a.delete-icon {
+    color: gray;
+}

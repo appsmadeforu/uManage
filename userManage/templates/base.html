@@ -30,65 +30,12 @@
         <div class="fixed-left">
             <div class="col-1" id="navbarToggleExternalContent">
                 <div class="nav-item">
-                    <ul><a class="nav-link" href="">Users</a></ul>
+                    <ul><a class="nav-link" href="{% url 'view_user' %}">Users</a></ul>
                 </div>
             </div>
         </div>
-        <div class="row nav-tabs">
-            <ul class="nav">
-                <li>
-                    <a class="nav-tab-item active" aria-current="page" href="#">User Management</a>
-                </li>
-            </ul>
-        </div>
-        <div class="card main-content">
-        {% block body %}
-          <div class="card-header">
-            Manage Users
-          </div>
-          <div class="card-body">
-              <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-primary">Add User</button>
-              </div>
-              <div class="input-group rounded">
-                  <form type="get" action="." style="margin: 0">
-                      <button id="search_submit" type="submit" ><i class="fas fa-search"></i></button>
-                    <input  id="search_box" type="text" aria-describedby="search-addon" name="search_box"  placeholder="Search..."
-                            aria-label="Search">
-                </form>
-            </div>
-            <div class="row table-row">
-                <table class="table">
-                    {% csrf_token %}
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="table-dark">
-                                User Name
-                              </th>
-                            <th class="table-dark">
-                                Roles
-                          </th><th class="table-dark">
-                              Action
-                          </th>
-                        </tr>
-                        {% for user in users %}
-                            <tr class="row-user">
-                                <td><p class="card-text">{{ user.user.username }}</p></td>
-                                {% if user.role %}
-                                    <td><p class="card-text">{{ user.role }}</p></td>
-                                {% else %}
-                                    <td>-</td>
-                                {% endif %}
-                                <td><a class="delete-icon" id="deleteuser" href="#delete_user" data-url="{% url 'delete_user' user.id %}">
-                                    <i class="fas fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </thead>
-                </table>
-            </div>
-          </div>
-        {% endblock %}
+        <div class="content">
+            {% block content %}{% endblock %}
         </div>
     </div>
 </nav>

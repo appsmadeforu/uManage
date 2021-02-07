@@ -11,7 +11,7 @@ function getCookie(cname) {
      return "";
 }
 
- $("#deleteuser").click(function(e){
+ $(".delete-icon").click(function(e){
     e.preventDefault();
     if (confirm("Are you sure you want to delete user?")){
     var req_url = $(this).data("url")

@@ -24,6 +24,24 @@ function getCookie(cname) {
         })
     }
  });
+
+ $("#add_user").click(function(e){
+    e.preventDefault();
+    window.location.href = $(this).data("url");
+ });
+
  $(document).ajaxStop(function(){
     window.location.reload();
+ });
+
+ $(document).ready(function(){
+
+ $("#flexCheckDefault").click(function(e){
+        if(this.checked){
+            $('input[type=checkbox]').each(function() { this.checked = true; });
+        } else {
+            $('input[type=checkbox]').each(function() { this.checked = false; });
+        }
+    });
+
 });

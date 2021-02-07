@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div style="overflow: auto; max-height: 100vh;">
+        <div class="row nav-tabs">
+            <ul class="nav">
+                <li>
+                    <a class="nav-tab-item active" aria-current="page" href="#">User Management</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card main-content">
+            <form method="post">
+            {% csrf_token %}
+            <div class="card-header flex-column flex-md-row" id="newUserCard">
+               <h5 class="card-title">New User</h5>
+               <div class="flex-row ml-md-auto d-none d-md-flex">
+                    <button type="button" class="btn btn-light">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add User</button>
+               </div>
+            </div>
+            <div class="card-body">
+                <div class="card" id="generalInfoCard">
+                    <div class="card-header  flex-column flex-md-row">
+                        1 - General Info
+                    </div>
+                    <div class="card-body">
+                        <div class="field">
+                            <div class="form-field">
+                                {{ form.first_name|as_crispy_field }}
+                            </div>
+                            <div class="form-field">
+                                {{ form.last_name|as_crispy_field }}
+                            </div>
+                            <div class="form-field">
+                                {{ form.user_name|as_crispy_field }}
+                            </div>
+                            <div class="form-field">
+                                {{ form.description|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" id="rolesCard">
+                    <div class="card-header" id="rolesCardHeader">
+                        <i class="fas fa-chevron-down" id="rolesDropdown" data-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        </i>
+                        Roles
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#rolesCard">
+                        <div class="card-body">
+                            <p class="card-text font-italic">Select Role(s) from the list below</p>
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="table-dark">
+                                           <div class="form-check form-check-inline">
+                                                <input class="form-check-input css-checkbox" type="checkbox" value="" id="flexCheckDefault">
+                                           </div>
+                                        </th>
+                                        <th class="table-dark">
+                                            Role Name
+                                        </th>
+                                        <th class="table-dark">
+                                            Description
+                                        </th>
+                                        <th class="table-dark">
+                                            roles
+                                        </th>
+                                    </tr>
+                                </thead>
+                                {% for role in roles %}
+                                    <tr class="row-user">
+                                        <td>
+                                            <div class="form-check form-check-inline">
+                                               <input class="form-check-input checkbox" type="checkbox" value="{{ role.role_name }}"
+                                                id="flexCheckDefault">
+                                            </div>
+                                        </td>
+                                        <td><p class="card-text">{{ role.role_name }}</p></td>
+                                        <td><p class="card-text">{{ role.description }}</p></td>
+                                        <td><p class="card-text">{{ role.role }}</p></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+{% endblock %}

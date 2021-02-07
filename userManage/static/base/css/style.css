@@ -105,3 +105,35 @@ tr.row-user:hover {
 a.delete-icon {
     color: gray;
 }
+.card-header.flex-column.flex-md-row {
+    display: -webkit-box;
+}
+.form-group {
+    display: inline-flex;
+}
+.form-new-user {
+    color: dimgray;
+    display: flow-root;
+    font-weight: 500;
+}
+div#newUserCard {
+    background: white;
+}
+button.btn.btn-light {
+    margin-right: 10px;
+}
+div#div_id_first_name, div#div_id_user_name,
+div#div_id_last_name, div#div_id_description{
+    width:50%
+}
+label {
+    margin-right: 25%;
+}
+div#generalInfoCard {
+    margin-bottom: 10px;
+}
+
+input#flexCheckDefault {
+    width: 15px;
+    height: 15px;
+}

@@ -59,6 +59,7 @@
             </div>
             <div class="row table-row">
                 <table class="table">
+                    {% csrf_token %}
                     <thead class="thead-light">
                         <tr>
                             <th class="table-dark">
@@ -79,7 +80,6 @@
                                     <td>-</td>
                                 {% endif %}
                                 <td><a class="delete-icon" id="deleteuser" href="#delete_user" data-url="{% url 'delete_user' user.id %}">
-                                    {% csrf_token %}
                                     <i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>

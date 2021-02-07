@@ -47,6 +47,8 @@ class AddUserView(CreateView, generic.ListView):
                 user.save()
             except IntegrityError:
                 return redirect(reverse("view_user"))
+            except BaseException:
+                return redirect(reverse("view_user"))
         return redirect(reverse("view_user"))
 
     def get_success_url(self):

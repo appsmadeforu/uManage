@@ -137,3 +137,6 @@ input#flexCheckDefault {
     width: 15px;
     height: 15px;
 }
+.role_text {
+    display: inline-flex;
+}

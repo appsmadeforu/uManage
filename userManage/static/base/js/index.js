@@ -35,6 +35,12 @@ function getCookie(cname) {
  });
 
  $(document).ready(function(){
+ $('input[name="role_list"]').click(function(e){
+     var numberOfChecked = $('input[name="role_list"]:checked').length;
+     document.getElementById("selectedRoles").innerHTML = "&nbsp" + numberOfChecked;
+ });
+
+
 
  $("#flexCheckDefault").click(function(e){
         if(this.checked){
@@ -42,6 +48,8 @@ function getCookie(cname) {
         } else {
             $('input[type=checkbox]').each(function() { this.checked = false; });
         }
+        var numberOfChecked = $('input[name="role_list"]:checked').length;
+        document.getElementById("selectedRoles").innerHTML = "&nbsp" + numberOfChecked;
     });
 
 });

@@ -52,7 +52,9 @@
                     </div>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#rolesCard">
                         <div class="card-body">
-                            <p class="card-text font-italic">Select Role(s) from the list below</p>
+                            <div class="role_text">
+                                <p class="card-text font-italic">Select Role(s) from the list below <p id="selectedRoles"> </p></p>
+                            </div>
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
@@ -76,7 +78,7 @@
                                     <tr class="row-user">
                                         <td>
                                             <div class="form-check form-check-inline">
-                                               <input class="form-check-input checkbox" type="checkbox" value="{{ role.role_name }}"
+                                               <input class="form-check-input checkbox" name="role_list" type="checkbox" value="{{ role.id }}"
                                                 id="flexCheckDefault">
                                             </div>
                                         </td>

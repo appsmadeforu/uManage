@@ -1,3 +1,4 @@
 django
 pre-commit
 django-crispy-forms
+django-shortuuidfield

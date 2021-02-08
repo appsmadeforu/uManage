@@ -41,12 +41,10 @@
                                     {% for user in users %}
                                         <tr class="row-user">
                                             <td><p class="card-text">{{ user.user.username }}</p></td>
-                                            {% if user.role %}
-                                                <td><p class="card-text">{{ user.role }}</p></td>
-                                            {% else %}
-                                                <td>-</td>
+                                            {% if user.id in userrole %}
+                                                <td><p class="card-text">{{ userrole|get_item:user.id }}</p></td>
                                             {% endif %}
-                                            <td><a class="delete-icon" id="deleteuser" href="#delete_user" data-url="{% url 'delete_user' user.id %}">
+                                            <td><a class="delete-icon" id="deleteuser" href="#delete_user" data-url="{% url 'delete_user' user.user.id %}">
                                                 <i class="fas fa-trash"></i></a>
                                             </td>
                                         </tr>

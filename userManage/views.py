@@ -1,12 +1,13 @@
 from django.contrib.auth.models import User as AuthUser
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.defaulttags import register
 from django.urls import reverse, reverse_lazy
 from django.utils import log
 from django.views import generic
 from django.views.generic import CreateView
 from userManage.forms import NewUserForm
-from userManage.models import Role, User
+from userManage.models import Role, User, Userrole
 
 
 # Create your views here.
@@ -44,8 +45,16 @@ class AddUserView(CreateView, generic.ListView):
                 user.last_name = form.cleaned_data["last_name"]
                 user.username = form.cleaned_data["user_name"]
                 user.description = form.cleaned_data["description"]
+                selectedRoles = Role.objects.filter(id__in=self.request.POST.getlist("role_list"))  # noqa
                 user.save()
+                if selectedRoles:
+                    for role in selectedRoles:
+                        Userrole.objects.create(user=user, role=role)
+                else:
+                    Userrole.objects.create(user=user)
             except IntegrityError:
+                return redirect(reverse("view_user"))
+            except BaseException:
                 return redirect(reverse("view_user"))
         return redirect(reverse("view_user"))
 
@@ -63,6 +72,24 @@ class UserHomeView(generic.ListView):
     queryset = User.objects.all()
     model = User
 
+    @register.filter
+    def get_item(dictionary, key):
+        return dictionary.get(key)
+
+    def get_userroles(self):
+        users = User.objects.all()
+        user_role = {}
+        for user in users:
+            roles = Userrole.objects.filter(user_id=user.id)
+            joined_string = ",".join([role.role.role_name for role in roles])
+            user_role.update({user.id: joined_string})
+        return user_role
+
+    def get_context_data(self, **kwargs):
+        context = super(UserHomeView, self).get_context_data(**kwargs)
+        context["userrole"] = self.get_userroles()
+        return context
+
 
 def DeleteUserView(request, user_id):
     """
@@ -73,6 +100,8 @@ def DeleteUserView(request, user_id):
     """
     if request.method == "POST":
         user = get_object_or_404(User, id=user_id)
+        user_role = Userrole.objects.filter(user__in=user_id)
+        user_role.delete()
         user.delete()
         log.request_logger("User is deleted successfully")
     return redirect("/")

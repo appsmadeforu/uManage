@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User as AuthUser
 from django.db import IntegrityError
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import redirect, render
 from django.template.defaulttags import register
 from django.urls import reverse, reverse_lazy
 from django.utils import log
@@ -81,7 +81,7 @@ class UserHomeView(generic.ListView):
         user_role = {}
         for user in users:
             roles = Userrole.objects.filter(user_id=user.id)
-            joined_string = ",".join([role.role.role_name for role in roles])
+            joined_string = ", ".join([role.role.role_name for role in roles])
             user_role.update({user.id: joined_string})
         return user_role
 
@@ -99,9 +99,10 @@ def DeleteUserView(request, user_id):
     :return: redirects to home page.
     """
     if request.method == "POST":
-        user = get_object_or_404(User, id=user_id)
+        user = User.objects.filter(user_id=user_id)
         user_role = Userrole.objects.filter(user__in=user_id)
-        user_role.delete()
-        user.delete()
+        if user or user_role:
+            user.delete()
+            user_role.delete()
         log.request_logger("User is deleted successfully")
     return redirect("/")

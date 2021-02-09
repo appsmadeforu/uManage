@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="overflow: auto; max-height: 100vh;">
+        <div class="row nav-tabs">
+            <ul class="nav">
+                <li>
+                    <a class="nav-tab-item active" aria-current="page" href="#">User Management</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card main-content">
+            <div class="card-header">
+                <div class="edit-user-header">
+                    <a href="{% url 'view_user' %}">
+                        <i class="fas fa-chevron-left"></i> Back
+                    </a>
+                    <p class="card-text" style="margin-left:10px; font-weight: bold; display: inline;">
+                        {{ user }}
+                    </p>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary save-btn">Save</button>
+                        <a class="delete-icon edit-user" href="#delete_user" data-url="{% url 'delete_user' user.user.id %}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card" id="generalInfoCard">
+                    <div class="card-header  flex-column flex-md-row">
+                        1 - General Info
+                    </div>
+                    <div class="card-body edit-info-body">
+                        <div class="row">
+                            <p class="card-text" style="font-weight: bold;">First Name:</p>
+                            <p class="card-text value">{{ user.user.first_name }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="card-text" style="font-weight: bold;">Last Name:</p>
+                            <p class="card-text value">{{ user.user.last_name }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="card-text" style="font-weight: bold;">UserName:</p>
+                            <p class="card-text value">{{ user }}</p>
+                        </div>
+                        <div class="row">
+                            <p class="card-text" style="font-weight: bold;">Description:</p>
+                            <input type="text" id="descriptionText" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            <div class="card-body">
+                <div class="card" id="rolesCardEdit">
+                    <div class="card-header" id="rolesCardHeader">
+                        <i class="fas fa-chevron-down" id="rolesDropdown" data-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        </i>
+                        Roles
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#rolesCard">
+                        <div class="card-body">
+                            <div class="role_text">
+                                <p class="card-text font-italic">Select Role(s) from the list below <p id="selectedRoles"> </p></p>
+                            </div>
+                            <table class="table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="table-dark">
+                                           <div class="form-check form-check-inline">
+                                                <input class="form-check-input css-checkbox" type="checkbox" value="" id="flexCheckDefault">
+                                           </div>
+                                        </th>
+                                        <th class="table-dark">
+                                            Role Name
+                                        </th>
+                                        <th class="table-dark">
+                                            Description
+                                        </th>
+                                        <th class="table-dark">
+                                            roles
+                                        </th>
+                                    </tr>
+                                </thead>
+                                {% for role in roles %}
+                                    <tr class="row-user">
+                                        <td>
+                                            <div class="form-check form-check-inline">
+                                               <input class="form-check-input checkbox" name="role_list" type="checkbox" value="{{ role.id }}"
+                                                id="flexCheckDefault">
+                                            </div>
+                                        </td>
+                                        <td><p class="card-text">{{ role.role_name }}</p></td>
+                                        <td><p class="card-text">{{ role.description }}</p></td>
+                                        <td><p class="card-text">{{ role.role }}</p></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+</div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endblock %}

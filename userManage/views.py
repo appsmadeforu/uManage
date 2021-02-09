@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User as AuthUser
 from django.db import IntegrityError
-from django.shortcuts import redirect, render
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.template.defaulttags import register
 from django.urls import reverse, reverse_lazy
-from django.utils import log
 from django.views import generic
 from django.views.generic import CreateView
 from userManage.forms import NewUserForm
@@ -91,7 +91,7 @@ class UserHomeView(generic.ListView):
         return context
 
 
-def DeleteUserView(request, user_id):
+def deleteUser(request, user_id):
     """
     Method to delete a user
     :param request:
@@ -100,9 +100,30 @@ def DeleteUserView(request, user_id):
     """
     if request.method == "POST":
         user = User.objects.filter(user_id=user_id)
-        user_role = Userrole.objects.filter(user__in=user_id)
+        user_role = Userrole.objects.filter(user__in=user)
         if user or user_role:
             user.delete()
             user_role.delete()
-        log.request_logger("User is deleted successfully")
+            if request.POST.get("is_req_from_edit"):
+                return render(request, "view_user.html")
     return redirect("/")
+
+
+class EditUserView(generic.DetailView):
+    model = User
+    template_name = "edit_user.html"
+    context_object_name = "user"
+
+    def get(self, request, *args, **kwargs):
+        try:
+            self.object = self.get_object()
+        except Http404:
+            # redirect here
+            return redirect(reverse("view_user"))
+        context = self.get_context_data(user=self.object)
+        context["roles"] = Role.objects.all()
+        context["user_roles"] = Userrole.objects.filter(user_id=self.object.id)
+        return self.render_to_response(context)
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(User, pk=self.kwargs.get("pk"))

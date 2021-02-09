@@ -16,7 +16,7 @@
             <div class="card-body">
                 <div class="d-flex justify-content-end">
                     <button id="add_user" data-url="{% url 'add_user' %}" type="button" class="btn btn-primary">Add User</button>
-                  </div>
+                </div>
                 <div class="input-group rounded">
                       <form type="get" action="." style="margin: 0">
                           <button id="search_submit" type="submit" ><i class="fas fa-search"></i></button>
@@ -40,7 +40,7 @@
                                     </tr>
                                     {% for user in users %}
                                         <tr class="row-user">
-                                            <td><p class="card-text">{{ user.user.username }}</p></td>
+                                            <td><a href="{% url 'edit_user' user.id %}"><p class="card-text">{{ user.user.username }}</p></a></td>
                                             {% if user.id in userrole %}
                                                 <td><p class="card-text">{{ userrole|get_item:user.id }}</p></td>
                                             {% endif %}

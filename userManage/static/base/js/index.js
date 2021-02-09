@@ -14,10 +14,15 @@ function getCookie(cname) {
  $(".delete-icon").click(function(e){
     e.preventDefault();
     if (confirm("Are you sure you want to delete user?")){
+
     var req_url = $(this).data("url")
+    var is_req_from_edit = window.location.href.indexOf("edit_user") > 0
         $.ajax({
             type: "POST",
             url: req_url,
+            data : {
+                'is_req_from_edit': is_req_from_edit,
+            },
             beforeSend: function(xhr) {
             xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
             }

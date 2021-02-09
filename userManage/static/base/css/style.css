@@ -140,3 +140,23 @@ input#flexCheckDefault {
 .role_text {
     display: inline-flex;
 }
+.card-header.edit-user-header {
+    background: white;
+}
+button.btn.btn-primary.save-btn {
+    width: 85px;
+}
+a.delete-icon.edit-user {
+    color: darkslategray;
+    font-size: 25px;
+    margin-left: 15px;
+}
+.card-body.edit-info-body {
+    padding-left: 50px;
+}
+p.card-text.value {
+    margin-left: 25%;
+}
+input#descriptionText {
+    margin-left: 24.5%;
+}

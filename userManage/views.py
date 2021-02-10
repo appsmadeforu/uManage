@@ -41,11 +41,12 @@ class AddUserView(CreateView, generic.ListView):
                 authUser = AuthUser.objects.get(username=form.cleaned_data["user_name"])  # noqa
                 user = User()
                 user.user_id = authUser.id
-                user.first_name = form.cleaned_data["first_name"]
-                user.last_name = form.cleaned_data["last_name"]
+                authUser.first_name = form.cleaned_data["first_name"]
+                authUser.last_name = form.cleaned_data["last_name"]
                 user.username = form.cleaned_data["user_name"]
                 user.description = form.cleaned_data["description"]
                 selectedRoles = Role.objects.filter(id__in=self.request.POST.getlist("role_list"))  # noqa
+                authUser.save()
                 user.save()
                 if selectedRoles:
                     for role in selectedRoles:
@@ -122,7 +123,8 @@ class EditUserView(generic.DetailView):
             return redirect(reverse("view_user"))
         context = self.get_context_data(user=self.object)
         context["roles"] = Role.objects.all()
-        context["user_roles"] = Userrole.objects.filter(user_id=self.object.id)
+        userrole = Userrole.objects.filter(user_id=self.object.id)
+        context["user_roles"] = [role.role.id for role in userrole]
         return self.render_to_response(context)
 
     def get_object(self, queryset=None):

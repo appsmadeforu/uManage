@@ -86,10 +86,17 @@
                                 {% for role in roles %}
                                     <tr class="row-user">
                                         <td>
-                                            <div class="form-check form-check-inline">
-                                               <input class="form-check-input checkbox" name="role_list" type="checkbox" value="{{ role.id }}"
-                                                id="flexCheckDefault">
-                                            </div>
+                                            {% if role.id in user_roles %}
+                                                <div class="form-check form-check-inline">
+                                                   <input class="form-check-input checkbox" checked name="role_list" type="checkbox" value="{{ role.id }}"
+                                                    id="flexCheckDefault">
+                                                </div>
+                                            {% else %}
+                                                <div class="form-check form-check-inline">
+                                                   <input class="form-check-input checkbox" name="role_list" type="checkbox" value="{{ role.id }}"
+                                                    id="flexCheckDefault">
+                                                </div>
+                                            {% endif %}
                                         </td>
                                         <td><p class="card-text">{{ role.role_name }}</p></td>
                                         <td><p class="card-text">{{ role.description }}</p></td>
@@ -99,7 +106,7 @@
                             </table>
                         </div>
                     </div>
-</div>
+                </div>
             </div>
             </div>
         </div>
